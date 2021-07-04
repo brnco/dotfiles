@@ -4,7 +4,7 @@ colors:
     background: '0x0f111a'
     foreground: '0xD8DEE9'
   cursor:
-    cursor: '0xff4151'
+    cursor: '0xB48EAD'
   normal:
     black:      '0x4C566A'
     red:        '0xBF616A'
