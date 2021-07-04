@@ -1,0 +1,8 @@
+cyan | #3A575c | 072
+black | #0F111A | 233
+yellow | #EBCB8B | 180 or 222
+red | #BF616A | 211 or 131
+white | #E5E9F0 | 255
+green | #A3BE8C | 151
+
+

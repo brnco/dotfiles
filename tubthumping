@@ -1,0 +1,7 @@
+#!/bin/bash
+
+systemctl enable zfs-mount
+systemctl enable zfs.target
+zpool import -d /dev/disk/by-uuid tub
+zpool status -v tub
+systemctl start smb
