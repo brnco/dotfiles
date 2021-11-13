@@ -22,13 +22,21 @@ integrate Gruvbox
 
 attachbottom
 
-bar height
+barheight
 
 barpadding
 
 centretitle
 
 colorbar
+
+cursorwarp
+
+leftstack
+
+swapfocus
+
+winicon
 
 ### keybindings
 
