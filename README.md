@@ -1,6 +1,8 @@
 # system files for customization
-foobar
-## individual colors/themes are on different branches
+
+each branch contains config files for a particular theme on a particular machine
+
+e.g. material_ocean is on two machines, and has two branches, one for "petiole" (Arch-linux recycle machine, my baby) and 2018-0687 (my work-issued laptop)
 
 ### material ocean
 
@@ -16,28 +18,4 @@ coming soon [Gruvbox](https://github.com/morhetz/gruvbox)
 
 integrate Gruvbox
 
-### DWM
-
-#### add patches
-
-attachbottom
-
-barheight
-
-barpadding
-
-centretitle
-
-colorbar
-
-cursorwarp
-
-leftstack
-
-swapfocus
-
-winicon
-
-### keybindings
-
-look into [these](https://wiki.archlinux.org/title/Keyboard_shortcuts)
+really config Powerline
