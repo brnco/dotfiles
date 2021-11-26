@@ -1,0 +1,25 @@
+how to's for important config work
+
+1. Git
+
+1.1 Rename a Branch
+git branch -m <oldname> <newname> #rename the branch
+git push origin -u <newname> #push to remote
+git push origin --delete <oldname> #delete remote, doesn't work on repo default branch
+
+
+2. Vim
+esc     #enter command mode
+:       #enter command
+i       #enter insert mode
+w       #write (save)
+q       #quit
+dd      #delete line (cut)
+yy      #yank line (copy)
+p       #paste after cursor
+P       #paste before cursor
+gp|gP   #paste with cursor at end of paste
+$       #place cursor at end of current line
+H       #goto top
+M       #goto middle
+L       #goto end
