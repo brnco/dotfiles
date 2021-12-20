@@ -1,0 +1,24 @@
+# material ocean color scheme
+colors:
+  primary:
+    background: '0xD8DEDA'
+    foreground: '0x101210'
+  cursor:
+    cursor: '0x6A746E'
+  normal:
+    black:      '0x101210'
+    red:        '0xBE4018'
+    green:      '0x1A6822'
+    yellow:     '0xD0B25A'
+    blue:       '0x2A2ADA'
+    magenta:    '0xA00051'
+    cyan:       '0x6EA27A'
+    white:      '0xD8DEDA'
+
+font:
+  size: 8.5
+  # fixes tmux bottom navbar being cut-off
+  offset:
+    y: 1
+  normal:
+    family: "Inconsolata for Powerline"
