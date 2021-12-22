@@ -1,20 +1,20 @@
-color       hex     r       g      b    
+color       hex     r       g       b       256    
 
-black0      101210  16      18      16
-red1        BE4018  190     64      24
-green2      1A6822  26      104     34
-yellow3     D0B25A  208     178     90
-blue4       2A2ADA  42      42      218
-magenta5    A00051  160     0       80    
-cyan6       6EA27A  110     162     122
-white7      D8DEDA  216     222     218
-bblack8     6A746E  106     116     110
-bred9       FF5622  255     86      34
-bgreen10    60BA2C  96      186     44
-byellow11   F4F028  244     240     40
-bblue12     6AA6FF  106     166     255
-bmagenta13  Fa007E  250     0       126
-bcyan14     9CDEC0  174     250     216
-bwhite15    F6FEFA  246     254     250
+black0      101210  16      18      16      233
+red1        BE4018  190     64      24      124
+green2      1A6822  26      104     34      150
+yellow3     D0B25A  208     178     90      178
+blue4       2A2ADA  42      42      218     62
+magenta5    A00051  160     0       80      125
+cyan6       6EA27A  110     162     122     74
+white7      D8DEDA  216     222     218     194
+bblack8     6A746E  106     116     110     243
+bred9       FF5622  255     86      34      203
+bgreen10    60BA2C  96      186     44      71
+byellow11   F4F028  244     240     40      227
+bblue12     6AA6FF  106     166     255     75
+bmagenta13  Fa007E  250     0       126     198
+bcyan14     9CDEC0  174     250     216     159
+bwhite15    F6FEFA  246     254     250     231
 
 
