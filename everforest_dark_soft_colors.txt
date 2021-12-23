@@ -1,0 +1,21 @@
+color       hex     r       g       b       x-term    
+
+bg          323d43                          103
+fg          d3c6aa                          223
+black0      4b565c                          103
+red1        e67e80                          211
+green2      a7c080                          143
+yellow3     dbbc7f                          180
+blue4       7fbbb3                          72
+magenta5    d699b6                          218
+cyan6       83c092                          108
+white7      d3c6aa                          223
+bblack8     4b565c                          103
+bred9       e67e80                          211
+bgreen10    a7c080                          143
+byellow11   dbbc7f                          180
+bblue12     7fbbb3                          72
+bmagenta13  d699b6                          218
+bcyan14     83c092                          108
+bwhite15    d3c6aa                          223
+

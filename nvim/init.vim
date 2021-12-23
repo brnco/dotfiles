@@ -20,14 +20,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'kaicataldo/material.vim', {'branch':'main'}
+Plug 'sainnhe/everforest'
+"Plug 'kaicataldo/material.vim', {'branch':'main'}
 call plug#end()
 
-let g:material_theme_style='ocean'
+"let g:material_theme_style='ocean'
 set background=dark
-colorscheme material
+colorscheme everforest
 
-let g:airline_theme='material'
+let g:everforest_background = 'soft'
+let g:everforest_cursor = 'purple'
+
+let g:airline_theme = 'everforest'
 
 if (has("termguicolors"))
     set termguicolors
