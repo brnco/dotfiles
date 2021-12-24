@@ -18,4 +18,4 @@ coming soon [Gruvbox](https://github.com/morhetz/gruvbox)
 
 integrate Gruvbox
 
-really config Powerline
+Consolas font change resulted in a bunch of ?s in vim (Airline, NERDTree)
