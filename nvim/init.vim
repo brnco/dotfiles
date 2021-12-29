@@ -19,8 +19,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
 Plug 'sainnhe/everforest'
+Plug 'ryanoasis/vim-devicons'
 "Plug 'kaicataldo/material.vim', {'branch':'main'}
 call plug#end()
 
