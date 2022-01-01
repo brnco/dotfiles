@@ -11,9 +11,11 @@
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
 
-set vicmd=vim
+set vicmd=nvim
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
+
+filetype * open %c
 
 " This makes vifm perform file operations on its own instead of relying on
 " standard utilities like `cp`.  While using `cp` and alike is a more universal
@@ -64,7 +66,7 @@ set norunexec
 
 " List of color schemes to try (picks the first one supported by the terminal)
 
-colorscheme mo-brnco
+colorscheme Default
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
