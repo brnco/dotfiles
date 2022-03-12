@@ -1,5 +1,5 @@
 # system files for customization
-foobar
+
 ## individual colors/themes are on different branches
 
 ### material ocean
@@ -66,7 +66,7 @@ G | last line
 
 A | insert at end of line
 
-o | open ne wline below current line
+o | open newline below current line
 
 ## split window into panes
 
@@ -88,7 +88,7 @@ super+j | focus 1 window down the stack
 
 super+k | focus 1 window up the stack
 
-# Arch Linux VMBox Install notes
+# Arch Linux VirtualBox Install notes
 
 [Arch Wiki Install Guide](https://wiki.archlinux.org/title/installation_guide)
 
@@ -108,7 +108,7 @@ Enable EFI
 
 ### Display
 
-Video Memory - lots (128MB?)
+Video Memory - max it out (currently 128MB)
 
 Enable 3d Accel
 
@@ -140,13 +140,13 @@ should be done automatically, but
 
 ## partition disk
 
-### set partition where Linux lives
+### set partition for boot
 
     fdisk -l
 
     fdisk /dev/sda
 
-    g - create gpt partiton table
+    g - create gpt partition table
 
     n - create new partition
 
@@ -166,7 +166,7 @@ should be done automatically, but
 
     +2G - 2GB swap size
 
-### set partition for actual data
+### set partition for linux install
 
     n - new partition
 
@@ -236,7 +236,7 @@ should be done automatically, but
 
 ### set locale
 
-    pacman -S nvim
+    pacman -S neovim
 
     nvim /etc/locale.gen
 
@@ -288,13 +288,13 @@ should be done automatically, but
 
 ### GRUB install and config
 
-    grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/EFI --no-nvram --recheck
+    grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/EFI
 
     grub-mkconfig -o /boot/grub/grub.cfg
 
-### install the rest
+### install and enable Networkmanager
 
-    pacman -S networkmanager git
+    pacman -S networkmanager
 
     systemctl enable NetworkManager
 
