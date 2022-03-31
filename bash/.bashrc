@@ -1,7 +1,24 @@
-neofetch
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. /usr/share/powerline/bindings/bash/powerline.sh
+# # # set environment variables
+export TERM="xterm-256color"			#get the nice colors you like
+export HISTCONTROL=ignoredups:erasedups		#no duplicate entries
+export EDITOR="vim"
+
+# # # aliases
 alias sudo='sudo '
 alias ope='sudo $(history -p !!)'
+
+# # # functions
+
+function git() {
+if [[ $@ == "ass" ]]; then
+        command git add .
+    else
+        command git "$@"
+    fi
+}
+
+export -f git
+
+# # # launch
+neofetch
+eval "$(starship init bash)"
