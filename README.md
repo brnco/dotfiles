@@ -1,5 +1,5 @@
 # system files for customization
-testing pi-backyardwatcher
+
 ## individual colors/themes are on different branches
 
 ### material ocean
