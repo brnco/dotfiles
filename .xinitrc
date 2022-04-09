@@ -2,7 +2,13 @@
 nitrogen --restore &
 picom &
 dte(){
-    dte="$(date '+%Y-%m-%d | %H:%M')"
+    D2B=({0..1}{0..1}{0..1}{0..1}{0..1}{0..1})
+    hour="$(date '+%H')"
+    min="$(date '+%M')"
+    time=${D2B[$hour]}:${D2B[$min]}
+    date="$(date '+%Y-%m-%d')"
+    dte=" $date | $time "
+    #dte="$(date '+%Y-%m-%d | %H:%M')"
     echo -e "$dte"
 }
 
@@ -22,7 +28,7 @@ ipaddr() {
 }
 while true
 do
-    xsetroot -name " $(cputmp) | $(ipaddr) | $(mem) | $(dte)"
+    xsetroot -name " $(mem) |$(dte)"
     sleep 1m
 done &   
 exec dbus-launch dwm
