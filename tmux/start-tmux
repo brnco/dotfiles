@@ -1,0 +1,33 @@
+#!/bin/bash
+# start my favorite tmux sessions
+
+mode=$1
+
+pychm () {
+    echo "starting tmux for python-chm"
+    tmux new-session -d -s "pychm"
+    tmux rename-window -t 0 "git"
+    tmux send-keys -t "git" "cd ~/code/collections/automations" C-m
+    tmux new-window -t "pychm":1 -n "python"
+    tmux send-keys -t "python" "cd ~/code/collections/automations" C-m
+    tmux attach-session -t "pychm"
+}
+python-thm () {
+    tmux new-session -d -s "pythm"
+    tmux rename-window -t 0 "git"
+    tmux send-keys -t "git" "cd ~/code/thm"
+    tmux new-window -t "pythm":1 -n "makevideos"
+    tmux send-keys -t "makevideos" "cd ~/code/thm" C-m "nvim makevideos.py" C-m
+    tmux new-window -t "pythm":2 -n "sample-files"
+    tmux send-keys -t "sample-files" "cd /tub/brendan-project-archive/TheHistoryMakers/samples" C-m
+    tmux attach-session -t "pythm"
+}
+
+if [ $mode == "pychm" ]
+then
+    pychm
+elif [ $mode == "pythm" ]
+then
+    python-thm
+fi
+
