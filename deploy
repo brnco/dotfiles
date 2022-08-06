@@ -1,0 +1,6 @@
+cp bash/bashrc ~/.bashrc
+cp alacritty/alacritty.yml ~/.config/alacritty
+cp neofetch/config.conf ~/.config/neofetch
+cp -r nvim ~/.config/nvim
+cp starship/starship.toml ~/.config
+cp -r vifm ~/.config
