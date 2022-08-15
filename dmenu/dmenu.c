@@ -36,7 +36,7 @@ struct item {
 static char text[BUFSIZ] = "";
 static char *embed;
 static int bh, mw, mh;
-static unsigned int lineheight = 30;
+static unsigned int lineheight = 25;
 static unsigned int min_lineheight = 8;
 static int dmx = 8; /* put dmenu at this x offset */
 static int dmy = 8; /* put dmenu at this y offset (measured from the bottom if topbar is 0) */
