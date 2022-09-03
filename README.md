@@ -1,6 +1,4 @@
-# system files for customization
-
-## individual colors/themes are on different branches
+# system files for Omphalos build
 
 ### material ocean
 
@@ -88,7 +86,7 @@ super+j | focus 1 window down the stack
 
 super+k | focus 1 window up the stack
 
-# Arch Linux VirtualBox Install notes
+# Install Guide for Omphalos
 
 [Arch Wiki Install Guide](https://wiki.archlinux.org/title/installation_guide)
 
