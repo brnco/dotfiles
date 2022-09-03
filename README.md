@@ -1,96 +1,48 @@
 # system files for Omphalos build
 
-### material ocean
+## material ocean
 
-my take on the [Material Ocean theme](https://github.com/material-ocean/Material-Ocean)
-
-### gruvbox
-
-coming soon [Gruvbox](https://github.com/morhetz/gruvbox)
-
-## to do
-
-### general
-
-integrate Gruvbox
-
-### DWM
-
-#### add patches
-
-attachbottom
-
-barheight
-
-barpadding
-
-centretitle
-
-colorbar
-
-cursorwarp
-
-leftstack
-
-rotatestack
-
-swapfocus
-
-winicon
-
-### keybindings
-
-look into [these](https://wiki.archlinux.org/title/Keyboard_shortcuts)
-
-# cheat sheet
-
-focused on dwm/ vim/ tmux keybindings
-
-## nav
-
-super+enter | push focused window to main
-
-super+space | toggle to previous windowing mode
-
-0 | start of line
-
-$ | end of line
-
-gg | first line
-
-G | last line
-
-5gg or 5G | goto line 5
-
-A | insert at end of line
-
-o | open newline below current line
-
-## split window into panes
-
-:sp | :vs | :only
-
-horizontal split | vertical split | 1 pane only
-
-## move between panes
-
-tab
-
-## hjkl
-
-super+h | widen main
-
-super+l | narrow main
-
-super+j | focus 1 window down the stack
-
-super+k | focus 1 window up the stack
+[Material Ocean theme](https://github.com/material-ocean/Material-Ocean)
 
 # Install Guide for Omphalos
 
 [Arch Wiki Install Guide](https://wiki.archlinux.org/title/installation_guide)
 
 ## initial setup
+
+Using CHM 3082 Windows Surface Pro 3 with VirtualBox running Arch guest axil
+
+### Acquire iso
+
+used MIT mirror
+
+### check sig
+
+used Arch VM with pacman-key and shared folder C:\Users\user\Downloads -> /mnt/Downloads
+
+### prep install media
+
+used Patriot 15GB USB drive. Had previous Arch bootable on it but because I'm making some changes and that was over a year old, decided to redo entirely.
+
+#### delete previous data/ partitions
+
+1. plug in drive
+2. launch cmd.exe as admin
+3. `diskpart`
+4. `list disk`
+5. `select Disk 1`
+6. `clear`
+
+#### add new partition
+
+used MS Disk Management, formatted as FAT32
+
+#### prep media
+
+used Rufus
+
+
+
 
 Hard Disk - create vritual hard disk now
 
