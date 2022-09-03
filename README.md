@@ -10,7 +10,7 @@
 
 ## initial setup
 
-Using CHM 3082 Windows Surface Pro 3 with VirtualBox running Arch guest axil
+Using CHM 3083 Windows Surface Pro 3 with VirtualBox running Arch guest kneme
 
 ### Acquire iso
 
@@ -40,33 +40,6 @@ used MS Disk Management, formatted as FAT32
 #### prep media
 
 used Rufus
-
-
-
-
-Hard Disk - create vritual hard disk now
-
-VDI
-
-Dynamically allocated
-
-### System
-
-Processors
-
-Enable EFI
-
-### Display
-
-Video Memory - max it out (currently 128MB)
-
-Enable 3d Accel
-
-### Storage
-
-controller: IDE -> +
-
--- add arch linux iso (downloaded)
 
 ## Launch
 
@@ -150,7 +123,7 @@ should be done automatically, but
 
 ## make file systems
 
-    mkfs.fat -F32 /dev/sda1
+    mkfs.fat -F 32 /dev/sda1
 
     mkswap /dev/sda2
 
@@ -161,6 +134,10 @@ should be done automatically, but
 ## mount big partition
 
     mount /dev/sda3 /mnt
+    
+## mount the EFI partition
+
+    mount /dev/sda1 /mnt/boot/
 
 ## run pacstrap
 
@@ -198,7 +175,7 @@ should be done automatically, but
 
     nvim /etc/hostname
 
-    axil
+    omphalos
 
 ### create hostfile
 
@@ -208,17 +185,17 @@ should be done automatically, but
 
     ::1         localhost
 
-    127.0.1.1   axil.localdomain    axil
+    127.0.1.1   omphalos.localdomain    omphalos
 
 ### create users
 
     passwd - create new root password
 
-    useradd -m brnco - create your user name
+    useradd -m bec - create your user name
 
-    passwd brnco
+    passwd bec
 
-    usermod -aG wheel,audio,video,optical,storage brnco
+    usermod -aG wheel,audio,video,optical,storage bec
 
 #### add sudo
 
@@ -228,19 +205,21 @@ should be done automatically, but
 
     %wheel All=(ALL:ALL) ALL
 
-### install some important stuff
-
-    pacman -S grub efibootmgr dosfstools os-prober mtools
+### install systemd-boot loader
     
-    mkdir /boot/EFI
+    bootctl install --graceful (from [here](https://github.com/systemd/systemd/issues/13603#issuecomment-864860578))
+    
+### configure boot entry
 
-    mount /dev/sda1 /boot/EFI
+    https://wiki.archlinux.org/title/Systemd-boot#Loader_configuration
+    
+    including microcode from here
+    
+    https://wiki.archlinux.org/title/Systemd-boot#Adding_loaders
+    
+### install microcode
 
-### GRUB install and config
-
-    grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/EFI
-
-    grub-mkconfig -o /boot/grub/grub.cfg
+    sudo pacman -S intel-ucode
 
 ### install and enable Networkmanager
 
@@ -259,17 +238,25 @@ should be done automatically, but
 ## shutdown
 
     shutdown now
+    
+# Post Install
 
-## in VM settings -> Storage
+## cleanup
 
-click on .iso -> click disc with minus sign on it
+nouveau didn't like the startup without nvidia drivers but isntalling them removed the error
 
-## start VM
+## other utils
 
-should see hostname for login
+(Reference)[https://wiki.archlinux.org/title/General_recommendations]
 
-run ping to see if you have networking
+`nvidia nvidia-utils git firefox starship neofetch nitrogen apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo ssh gcc make`
+
+## desktop environment
+
+### dwm
+
+
 
 # Firefox Color link
 
-https://color.firefox.com/?theme=XQAAAALqAQAAAAAAAABBqYhm849SCia-yK6EGccwS-xMDPrzes6HTzD03vuOyKjlfyrdYZKg16ucwzn46LoiebXC5487A3ofFrMe55F9rFx50m4sLuktAxanbAFEtNgCMnO8o3xFG-UrJ8YxD0MCdT9DEFi2EqUK_Uffh9w32qYMp-RHlBWR6BmkZn2Nl7_fByF9weOsL3X6B41rkrzqiKo791Ec7VJWdKmC1D76jmgTeyG_5dDOQglqBgXk3LdWX0sCKodHPrj0I0ihJKqq6MwTlfIWq4Tf-B41BhGwnWnKpcvhbMsQOsUPz_AYdUT3TzHfG1WHaLmjr2P2Gq7Gm90tmtVY5G-DB8_f_5AsLUA
+(Material Ocean Colors)[https://color.firefox.com/?theme=XQAAAALqAQAAAAAAAABBqYhm849SCia-yK6EGccwS-xMDPrzes6HTzD03vuOyKjlfyrdYZKg16ucwzn46LoiebXC5487A3ofFrMe55F9rFx50m4sLuktAxanbAFEtNgCMnO8o3xFG-UrJ8YxD0MCdT9DEFi2EqUK_Uffh9w32qYMp-RHlBWR6BmkZn2Nl7_fByF9weOsL3X6B41rkrzqiKo791Ec7VJWdKmC1D76jmgTeyG_5dDOQglqBgXk3LdWX0sCKodHPrj0I0ihJKqq6MwTlfIWq4Tf-B41BhGwnWnKpcvhbMsQOsUPz_AYdUT3TzHfG1WHaLmjr2P2Gq7Gm90tmtVY5G-DB8_f_5AsLUA]
