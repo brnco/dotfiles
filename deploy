@@ -5,28 +5,89 @@
 
 usage() { echo "Usage: [-all] [-bash] [-display] [-terminal]" 1>&2; exit 1; }
 
-function just_bash()
+function bash()
 {
-    echo "just the bash stuff" >&2
+    echo "~/.bashrc"
+    if [ -v reverse ]; then
+        echo "cp ~/.bashrc ~/code/dotfiles/bash"
+    else
+        echo "cp ~/code/dotfiles/bash/.bashrc ~/"
+    fi
+    echo "~/.bash_profile"
+    if [ -v reverse ]; then
+        echo "cp ~/.bash_profile ~/code/dotfiles/bash"
+    else
+        echo "cp ~/code/dotfiles/bash/.bash_profile ~/"
+    fi
+}
+
+function term()
+{
+    echo "alacritty"
+    echo "~/.bashrc"
+    echo "~/.bash_profile"
+    echo "starship"
+    echo "nvim"
+    echo "moc"
+    echo "neofetch"
+    echo "vifm"
+    echo "tmux"
+}
+
+function sys()
+{
+    echo "pacman.conf"
+    echo "~/.xinitrc"
+    echo "dwm"
+    echo "dmenu"
+    echo "/etc/fstab"
+    echo "tubthumping"
+}
+
+function web()
+{
+    echo "httpd"
+}
+
+function other()
+{
+    echo "dolphin"
+    echo "mpd"
+    echo "ffmpeg"
 }
 
 function get_all()
 {
     for func in $(grep "^function" $0)
     do
-        if [ $func != "function" ]; then
-            echo $func >&2
+        if [ $func != "function" ] && [ $func != "get_all()" ]; then
+            ${func::-2}
         fi
     done
 }
 
-while getopts ":ab" opt; do
+while getopts ":aborstw" opt; do
     case $opt in
+        r)
+            reverse=1
+            ;;
         a)
             get_all
             ;;
         b)
-            just_bash
+            bash
+            ;;
+        o)
+            other
+            ;;
+        s)
+            sys
+            ;;
+        t)
+            term
+            ;;
+        w)
+            web
             ;;
         *)
             usage
