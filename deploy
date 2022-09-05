@@ -1,6 +1,41 @@
-cp bash/bashrc ~/.bashrc
-cp alacritty/alacritty.yml ~/.config/alacritty
-cp neofetch/config.conf ~/.config/neofetch
-cp -r nvim ~/.config/nvim
-cp starship/starship.toml ~/.config
-cp -r vifm ~/.config
+#!/bin/bash
+
+# sends system files to their spots
+# -r options grabs system files form their spots
+
+usage() { echo "Usage: [-all] [-bash] [-display] [-terminal]" 1>&2; exit 1; }
+
+function just_bash()
+{
+    echo "just the bash stuff" >&2
+}
+
+function get_all()
+{
+    for func in $(grep "^function" $0)
+    do
+        if [ $func != "function" ]; then
+            echo $func >&2
+        fi
+    done
+}
+
+while getopts ":ab" opt; do
+    case $opt in
+        a)
+            get_all
+            ;;
+        b)
+            just_bash
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+# cp bash/bashrc ~/.bashrc
+# cp alacritty/alacritty.yml ~/.config/alacritty
+# cp neofetch/config.conf ~/.config/neofetch
+# cp -r nvim ~/.config/nvim
+# cp starship/starship.toml ~/.config
+# cp -r vifm ~/.config
