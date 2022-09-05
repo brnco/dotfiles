@@ -30,5 +30,7 @@ while true
 do
     xsetroot -name " $(mem) |$(dte)"
     sleep 1m
-done &   
+done &
+
+xrandr --output VGA-1 --mode 1920x1440
 exec dbus-launch dwm
