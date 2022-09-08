@@ -226,7 +226,7 @@ should be done automatically, but
 
 ### set timezone
 
-    ln -sf /usr/share/zoneinfo/America/LosAngeles /etc/localtime
+    ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 
     ls /usr/share/zoneinfo/America - lists cities for zoneinfo
 
