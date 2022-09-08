@@ -304,6 +304,7 @@ then, configure the driver for Xorg
     cd ~/code
     git clone git@github.com:brnco/dotfiles.git
     cd ~/code/dotfiles
+    git branch kneme-3083_material-ocean
     ./deploy -a
 
 # Firefox Color link
