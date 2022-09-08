@@ -277,6 +277,7 @@ then, configure the driver for Xorg
 
     git clone git://git.suckless.org/dwm
     cd dwm
+    nvim config.h [change terminal cmd to alacritty]
     make
     make clean install`
 
