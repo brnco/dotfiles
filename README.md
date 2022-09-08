@@ -275,22 +275,22 @@ then, configure the driver for Xorg
 
 [guide](https://wiki.archlinux.org/title/dwm)
 
-`git clone git://git.suckless.org/dwm
-cd dwm
-make
-make clean install`
+    git clone git://git.suckless.org/dwm
+    cd dwm
+    make
+    make clean install`
 
 ### set startx
 
-`nvim ~/.xinitrc
-exec dwm`
+    nvim ~/.xinitrc
+    exec dwm
 
 #### set startx -> run on login
 
-`nvim ~/.bashrc
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    exec startx
-fi`
+    nvim ~/.bashrc
+    if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+        exec startx
+    fi
 
 ## get your dang dotfiles
 
@@ -300,10 +300,10 @@ fi`
 
 ### clone and set up
 
-`cd ~/code
-git clone git@github.com:brnco/dotfiles.git
-cd ~/code/dotfiles
-./deploy -a`
+    cd ~/code
+    git clone git@github.com:brnco/dotfiles.git
+    cd ~/code/dotfiles
+    ./deploy -a
 
 # Firefox Color link
 
