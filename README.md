@@ -249,13 +249,46 @@ nouveau didn't like the startup without nvidia drivers but isntalling them remov
 
 (Reference)[https://wiki.archlinux.org/title/General_recommendations]
 
-`nvidia nvidia-utils git firefox starship neofetch nitrogen apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo ssh gcc make`
+`sudo pacman -S git firefox starship neofetch nitrogen picom apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo openssh gcc make`
 
 ## desktop environment
 
+### Xorg
+
+(guide)[https://wiki.archlinux.org/title/Xorg]
+
+`sudo pacman -S xorg-server xorg-xinit`
+
+### nvidia
+
+(guide)[https://wiki.archlinux.org/title/NVIDIA]
+
+your GTX 960 is too old for the open-sourced NVIDIA drivers so you're usign regular NVIDIA dirvers instead (per (this tool)[https://www.nvidia.com/Download/index.aspx])
+
+`sudo pacman -S nvidia nvidia-utils`
+
+then, configure the driver for Xorg
+
+`nvidia-xconfig`
+
 ### dwm
 
+`git clone git://git.suckless.org/dwm
+cd dwm
+make
+make clean install`
 
+### set startx
+
+nvim ~/.xinitrc
+exec dwm
+
+#### set startx -> run on login
+
+`nvim ~/.bashrc
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+    exec startx
+fi`
 
 # Firefox Color link
 
