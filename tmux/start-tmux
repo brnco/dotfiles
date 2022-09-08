@@ -3,8 +3,8 @@
 
 mode=$1
 
-pychm () {
-    echo "starting tmux for python-chm"
+function pychm() {
+    echo "starting tmux chm python development"
     tmux new-session -d -s "pychm"
     tmux rename-window -t 0 "git"
     tmux send-keys -t "git" "cd ~/code/collections/automations" C-m
@@ -12,7 +12,9 @@ pychm () {
     tmux send-keys -t "python" "cd ~/code/collections/automations" C-m
     tmux attach-session -t "pychm"
 }
-python-thm () {
+
+function pythm() {
+    echo "starting tmux for thm python development"
     tmux new-session -d -s "pythm"
     tmux rename-window -t 0 "git"
     tmux send-keys -t "git" "cd ~/code/thm"
@@ -23,11 +25,25 @@ python-thm () {
     tmux attach-session -t "pythm"
 }
 
+function pygen() {
+    echo "starting tmux with default python config"
+    tmux new-session -d -s "pygen"
+    tmux rename-window -t 0 "git"
+    tmux send-keys -t "git" "cd ~/code"
+    tmux new-window -t "pygen":1 -n "python"
+    tmux send-keys -t "python" "cd ~/code" C-m "python" C-m
+    tmux new-window -t "pygen":2 -n "nvim"
+    tmux send-keys -t "nvim" "cd ~/code" C-m "nvim" C-m
+    tmux attach-session -t "pygen"
+}
 if [ $mode == "pychm" ]
 then
     pychm
 elif [ $mode == "pythm" ]
 then
-    python-thm
+    pythm
+elif [ $mode == "pygen" ]
+then
+    pygen
 fi
 
