@@ -282,8 +282,8 @@ make clean install`
 
 ### set startx
 
-nvim ~/.xinitrc
-exec dwm
+`nvim ~/.xinitrc
+exec dwm`
 
 #### set startx -> run on login
 
@@ -291,6 +291,19 @@ exec dwm
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     exec startx
 fi`
+
+## get your dang dotfiles
+
+### add new system to GH ssh
+
+[guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+
+### clone and set up
+
+`cd ~/code
+git clone git@github.com:brnco/dotfiles.git
+cd ~/code/dotfiles
+./deploy -a`
 
 # Firefox Color link
 
