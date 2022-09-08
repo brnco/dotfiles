@@ -197,7 +197,7 @@ should be done automatically, but
 
     usermod -aG wheel,audio,video,optical,storage bec
 
-#### add sudo
+### add sudo
 
     pacman -S sudo
 
@@ -247,7 +247,7 @@ nouveau didn't like the startup without nvidia drivers but isntalling them remov
 
 ## other utils
 
-(Reference)[https://wiki.archlinux.org/title/General_recommendations]
+[Reference](https://wiki.archlinux.org/title/General_recommendations)
 
 `sudo pacman -S git firefox starship neofetch nitrogen picom apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo openssh gcc make`
 
@@ -255,15 +255,15 @@ nouveau didn't like the startup without nvidia drivers but isntalling them remov
 
 ### Xorg
 
-(guide)[https://wiki.archlinux.org/title/Xorg]
+[guide](https://wiki.archlinux.org/title/Xorg)
 
 `sudo pacman -S xorg-server xorg-xinit`
 
 ### nvidia
 
-(guide)[https://wiki.archlinux.org/title/NVIDIA]
+[guide](https://wiki.archlinux.org/title/NVIDIA)
 
-your GTX 960 is too old for the open-sourced NVIDIA drivers so you're usign regular NVIDIA dirvers instead (per (this tool)[https://www.nvidia.com/Download/index.aspx])
+your GTX 960 is too old for the open-sourced NVIDIA drivers so you're usign regular NVIDIA dirvers instead (per [this tool](https://www.nvidia.com/Download/index.aspx))
 
 `sudo pacman -S nvidia nvidia-utils`
 
@@ -272,6 +272,8 @@ then, configure the driver for Xorg
 `nvidia-xconfig`
 
 ### dwm
+
+[guide](https://wiki.archlinux.org/title/dwm)
 
 `git clone git://git.suckless.org/dwm
 cd dwm
