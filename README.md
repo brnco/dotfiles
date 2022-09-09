@@ -325,7 +325,13 @@ get your [aur helper](https://aur.archlinux.org/packages/yay)
 
 get [them fonts](https://aur.archlinux.org/packages/nerd-fonts-complete)
 
+## sound
 
+   sudo pacman -S alsa-utils
+   
+   alsamixer
+
+turn main volume up/ unmute with m key
 
 # Firefox Color link
 
