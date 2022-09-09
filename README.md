@@ -249,7 +249,7 @@ nouveau didn't like the startup without nvidia drivers but isntalling them remov
 
 [Reference](https://wiki.archlinux.org/title/General_recommendations)
 
-`sudo pacman -S git firefox starship neofetch nitrogen picom apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo openssh gcc make`
+`sudo pacman -S git firefox starship neofetch nitrogen picom apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo openssh base-devel`
 
 ## desktop environment
 
@@ -306,6 +306,26 @@ then, configure the driver for Xorg
     cd ~/code/dotfiles
     git branch kneme-3083_material-ocean
     ./deploy -a
+    
+## ZFS
+
+[this](https://wiki.archlinux.org/title/ZFS) is important
+
+    yay -S zfs-linux 
+
+
+    
+## beyond
+
+### yay
+
+get your [aur helper](https://aur.archlinux.org/packages/yay)
+
+### nerd-fonts-complete
+
+get [them fonts](https://aur.archlinux.org/packages/nerd-fonts-complete)
+
+
 
 # Firefox Color link
 
