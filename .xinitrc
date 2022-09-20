@@ -22,7 +22,7 @@ ipaddr() {
 }
 while true
 do
-    xsetroot -name " $(cputmp) | $(ipaddr) | $(mem) | $(dte)"
+    xsetroot -name " $(cputmp) | $(ipaddr) | $(mem) | $(dte) "
     sleep 1m
 done &   
 exec dbus-launch dwm
