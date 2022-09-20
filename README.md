@@ -207,15 +207,33 @@ should be done automatically, but
 
 ### install systemd-boot loader
     
-    bootctl install --graceful (from [here](https://github.com/systemd/systemd/issues/13603#issuecomment-864860578))
+from [here](https://github.com/systemd/systemd/issues/13603#issuecomment-864860578)
     
+    bootctl install --graceful
+    
+### get root partition UUID
+
+this is the partition used by linux, not boot partition
+
+    blkid -s PARTUUID -o value /dev/sda3 >> /boot/loader/entries/arch.conf
+
 ### configure boot entry
 
-    https://wiki.archlinux.org/title/Systemd-boot#Loader_configuration
+    *esp*/loader/entries/arch.conf
+    title   Arch Linux
+    linux   /vmlinuz-linux
+    initrd  /intel-ucode.img
+    initrd  /initramfs-linux.img
+    options root=PARTUUID=*UUID from previous step* rw
     
-    including microcode from here
+    cp arch.conf arch-fallback.conf
     
-    https://wiki.archlinux.org/title/Systemd-boot#Adding_loaders
+    *esp*/loader/entries/arch-fallback.conf
+    title   Arch Linux (fallback initramfs)
+    linux   /vmlinuz-linux
+    initrd  /intel-ucode.img
+    initrd  /initramfs-linux-fallback.img
+    options root=PARTUUID=*UUID from previous step* rw
     
 ### install microcode
 
