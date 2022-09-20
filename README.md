@@ -267,7 +267,7 @@ nouveau didn't like the startup without nvidia drivers but isntalling them remov
 
 [Reference](https://wiki.archlinux.org/title/General_recommendations)
 
-`sudo pacman -S git firefox starship neofetch nitrogen picom apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo openssh base-devel`
+`sudo pacman -S git firefox starship neofetch nitrogen picom apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo openssh base-devel unzip tree`
 
 ## desktop environment
 
@@ -275,7 +275,11 @@ nouveau didn't like the startup without nvidia drivers but isntalling them remov
 
 [guide](https://wiki.archlinux.org/title/Xorg)
 
-`sudo pacman -S xorg-server xorg-xinit`
+`sudo pacman -S xorg-server xorg-xinit xorg-apps`
+
+then we need to make your `~/.xinitrc`
+
+
 
 ### nvidia
 
@@ -287,17 +291,20 @@ your GTX 960 is too old for the open-sourced NVIDIA drivers so you're usign regu
 
 then, configure the driver for Xorg
 
-`nvidia-xconfig`
+`sudo nvidia-xconfig`
+
+`reboot`
 
 ### dwm
 
 [guide](https://wiki.archlinux.org/title/dwm)
 
+    mkdir code
+    cd code
     git clone git://git.suckless.org/dwm
     cd dwm
     nvim config.h [change terminal cmd to alacritty]
-    make
-    make clean install`
+    sudo make clean install`
 
 ### set startx
 
