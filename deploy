@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# sends system files to their spots
+# -r options grabs system files form their spots
+
+# usage() { echo "Usage: [-all] [-bash] [-display] [-terminal]" 1>&2; exit 1; }
+
+dotfiles="~/code/dotfiles"
+
+function bashrc()
+{
+	cp "$dotfiles/bash/.bashrc" ~/
+}
+
+function bash_profile()
+{
+	cp "$dotfiles/bash/.bash_profile" ~/
+}
+
+function alacritty()
+{
+	alacritty_dir="/home/bec/alacritty"
+	if [ ! -d "$alacritty_dir" ]; then
+		mkdir "$alacritty_dir"
+	fi
+	cp "$dotfiles/alacritty/alacritty.yml" "$alacritty_dir"
+}
+
+function starship()
+{
+	starship_dir="/home/bec/.config"
+	if [ ! -d "$starship_dir" ]; then
+		mkdir "$starship_dir"
+	fi
+	cp "$dotfiles/starship/starship.toml" "$starship_dir"
+}
+
+function neovim()
+{
+	neovim_dir="/home/bec/nvim"
+	if [ ! -d $neovim_dir ]; then
+		mkdir "$neovim_dir"
+	fi
+	cp "$dotfiles/nvim/init.vim" "$neovim_dir"
+}
+
+function moc()
+{
+	moc_dir = "/home/bec/.moc"
+	if [ ! -d "$moc_dir" ]; then
+		mkdir "$moc_dir"
+	fi
+	cp -R "$dotfiles/moc/" "$moc_dir"
+}
+
+function neofetch()
+{
+	neofetch_dir="/home/bec/.config/neofetch"
+	if [ ! -d "$neofetch_dir" ]; then
+		mkdir "$neofetch_dir"
+	fi
+	cp "$dotfiles/neofetch/config.conf" "$neofetch_dir"
+}
+
+function vifm()
+{
+	vifm_dir="/home/bec/.vifm"
+	if [ ! -d "$vifm_dir" ]; then
+		mkdir "$vifm_dir"
+	fi
+	cp -R "$dotfiles/vifm/" "$vifm_dir/"
+}
+
+function tmux()
+{
+	cp "$dotfiles/tmux/.tmux.conf" "~/"
+}
+
+function xinitrc()
+{
+	cp "$dotfiles/.xinitrc" "~/"
+}
+
+function get_all()
+{
+    for func in $(grep "^function" $0)
+    do
+        if [ $func != "function" ] && [ $func != "get_all()" ]; then
+            ${func::-2}
+        fi
+    done
+}
+
+
