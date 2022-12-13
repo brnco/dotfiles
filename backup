@@ -1,2 +1,0 @@
-#!/bin/bash
-rsync -aAXHSv /* /mnt/omphalos_bak/ --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/home/*/.gvfs,/etc/fstab,/etc/hosts,/etc/hostname}
