@@ -1,6 +1,5 @@
 [backup]
-current = /mnt/omphalos_bak
 daily = /mnt/adyton/omphalos_bak/daily
 weekly = /mnt/adyton/omphalos_bak/weekly
 monthly = /mnt/adyton/omphalos_bak/monthly
-logs = /mnt/adyton/omphalos_bak/logs
+logs = /mnt/adyton/omphalos_bak_logs

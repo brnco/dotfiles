@@ -15,4 +15,7 @@ UUID=7807ac91-b517-4956-b1ea-7f4c39030e32	none      	swap      	defaults  	0 0
 UUID=d25c20c8-b63c-4c86-99fc-3619293b02ea	/mnt/omphalos_bak	ext4	defaults,nofail	0 2
 
 # /dev/sdb4
-UUID=FB34-C526					/mnt/adyton	exfat		defaults,nofail,uid=1000,gid=1002,fmask=0002,dmask=0002	0 2
+UUID=983b7667-f2ef-45a2-996e-006e8edc6885	/mnt/omphalos_baks	ext4	defaults,nofail	0 2
+
+# /dev/sdb5
+UUID=EF9F-21DB					/mnt/adyton		exfat	defaults,nofail,umask=0007,uid=1002,gid=1002	0 2

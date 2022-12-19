@@ -2,6 +2,11 @@
 utility functions
 '''
 import os
+import subprocess
+import traceback
+import logging
+logger = logging.getLogger(__name__)
+
 class d(dict):
     '''
     dot.notation access to dictionary attributes
@@ -19,3 +24,21 @@ class cd:
         os.chdir(self.newPath)
     def __exit__(self, etype, value, traceback):
         os.chdir(self.savedPath)
+
+def run_cmd(cmd):
+    '''
+    runs cmd
+    '''
+    try:
+        logger.info("running below command:")
+        logger.info(str(cmd))
+        output = subprocess.run(cmd, shell=True)
+        if not output.returncode == 0:
+            logger.error("there was an error running that command")
+            return False
+        else:
+            logger.info("command ran successfully")
+            return True
+    except Exception as e:
+        logger.error("there was an error in the python execution of that command")
+        logger.error(traceback.format_exc())
