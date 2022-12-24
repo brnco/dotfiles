@@ -34,11 +34,16 @@ def init_daily_backups(kwvars):
     '''
     initializes info for daily backups
     '''
+    logger.debug("initializing info for daily backups")
     daily_subdirs = [x for x in kwvars.config.backup_daily.iterdir() if x.is_dir()]
     kwvars.backups.daily = util.d({"path":kwvars.config.backup_daily,\
                                 "subdirs":daily_subdirs})
+    logger.debug(daily_subdirs)
     most_recent_backup = datetime.strptime(str(sorted(daily_subdirs)[-1].name),'%Y-%m-%d')
+    logger.debug(most_recent_backup)
     yesterday = datetime.now() - timedelta(days=1)
+    logger.debug(yesterday)
+    logger.debug(yesterday > most_recent_backup)
     if yesterday > most_recent_backup:
         kwvars.backups.daily.needs_new_backup = True
     else:
@@ -50,13 +55,15 @@ def init_monthly_backups(kwvars):
     '''
     initializes info for monthly backups
     '''
+    logger.debug("initializing info for monthly backups")
     monthly_subdirs = [x for x in kwvars.config.backup_monthly.iterdir() if x.is_dir()]
-    kwvars.backups.weekly = util.d({"path":kwvars.config.backup_weekly,\
+    kwvars.backups.monthly = util.d({"path":kwvars.config.backup_monthly,\
                             "subdirs":monthly_subdirs})
+    logger.debug(monthly_subdirs)
     kwvars.backups.monthly.remove_dirs = parse_backup_dates_for_removal(monthly_subdirs,365)
-    most_recent_backup = datetime.strptime(str(sorted(weekly_subdirs)[-1].name),'%Y-%m-%d')
+    most_recent_backup = datetime.strptime(str(sorted(monthly_subdirs)[-1].name),'%Y-%m-%d')
     last_month = datetime.now() - timedelta(days=28)
-    if most_recent_backup > last_month:
+    if most_recent_backup < last_month:
         kwvars.backups.monthly.needs_new_backup = True
         kwvars.backups.monthly.origin = get_monthly_backup_origin(kwvars)
     else:
@@ -68,18 +75,18 @@ def get_monthly_backup_origin(kwvars):
     '''
     determines the weekly backup to copy to monthly
     '''
-    logging.debug("determining the weekly backup to copy to monthly")
-    most_recent_backup_weekly = str(sorted(kwvars.backups.monthly.subdirs)[0])
+    logger.debug("determining the weekly backup to copy to monthly")
+    most_recent_backup_weekly = sorted(kwvars.backups.monthly.subdirs)[0]
     current_weekly_origins = kwvars.backups.weekly.subdirs
-    closeness = 0
-    monthly origin = False
-    for potential_origin in current_weekly_backups:
-        _closeness = datetime.strptime(potential_origin.name,"%y-%m-%d") - \
-                timedelta(datetime.strptime(most_recent_backup_weekly,"%y-%m-%d"))
-        if closeness == "28":
-            monthly origin = potential_origin
+    closeness = timedelta(days=0)
+    monthly_origin = False
+    for potential_origin in current_weekly_origins:
+        _closeness = datetime.strptime(potential_origin.name,"%Y-%m-%d") - \
+                datetime.strptime(most_recent_backup_weekly.name,"%Y-%m-%d")
+        if _closeness == timedelta(days=28):
+            monthly_origin = potential_origin
             break
-        elif _closeness > closeness and _closeness < 7:
+        elif _closeness > closeness and _closeness < timedelta(days=28):
             closeness = _closeness
             monthly_origin = potential_origin
     if not monthly_origin:
@@ -87,20 +94,23 @@ def get_monthly_backup_origin(kwvars):
         logger.error("but the script detected that a new monthly backup is necessary")
         logger.error("please investigate")
         return False
-    kwvars.backups.monthly.origin = monthly_origin
-    return kwvars
+    return monthly_origin
 
 def init_weekly_backups(kwvars):
     '''
     initializes info for weekly backups
     '''
+    logger.debug("initializing weekly backups")
     weekly_subdirs = [x for x in kwvars.config.backup_weekly.iterdir() if x.is_dir()]
     kwvars.backups.weekly = util.d({"path":kwvars.config.backup_weekly,\
                             "subdirs":weekly_subdirs})
+    logger.debug(weekly_subdirs)
     kwvars.backups.weekly.remove_dirs = parse_backup_dates_for_removal(weekly_subdirs,28)
     most_recent_backup = datetime.strptime(str(sorted(weekly_subdirs)[-1].name),'%Y-%m-%d')
+    logger.debug(most_recent_backup)
     last_week = datetime.now() - timedelta(days=7)
-    if most_recent_backup > last_week:
+    logger.debug(last_week)
+    if most_recent_backup < last_week:
         kwvars.backups.weekly.needs_new_backup = True
         kwvars.backups.weekly.origin = get_weekly_backup_origin(kwvars)
     else:
@@ -112,41 +122,50 @@ def get_weekly_backup_origin(kwvars):
     '''
     determines the daily backup to copy to weekly
     '''
-    logging.debug("determining the daily backup to copy to weekly")
-    most_recent_backup_weekly = str(sorted(kwvars.backups.weekly.subdirs)[0])
+    logger.debug("determining the daily backup to copy to weekly")
+    most_recent_backup_weekly = sorted(kwvars.backups.weekly.subdirs)[0]
     current_daily_origins = kwvars.backups.daily.subdirs
-    closeness = 0
+    logger.debug(current_daily_origins)
+    closeness = timedelta(days=0)
     weekly_origin = False
     for potential_origin in current_daily_origins:
+        logger.debug("potential origin")
+        logger.debug(potential_origin)
         _closeness = datetime.strptime(potential_origin.name,"%Y-%m-%d") - \
-                timedelta(datetime.strptime(most_recent_backup_weekly,"%Y-%m-%d"))
-        if _closeness == 7:
+                datetime.strptime(most_recent_backup_weekly.name,"%Y-%m-%d")
+        if _closeness == timedelta(days=7):
             weekly_origin = potential_origin
             break
-        elif _closeness > closeness and _closeness < 7:
+        elif _closeness > closeness and _closeness < timedelta(days=7):
             closeness = _closeness
             weekly_origin = potential_origin
+        logger.debug("current weekly origin")
+        logger.debug(weekly_origin)
     if not weekly_origin:
         logger.error("there was a problem determining the origin of the weekly backup")
         logger.error("but the script detected that a new weekly backup is necessary")
         logger.error("please investigate")
         return False
-    kwvars.backups.weekly.origin = weekly_origin
-    return kwvars
+    return weekly_origin
 
 def make_monthly_backup(kwvars):
     '''
     copies a weekly backup to monthly
     '''
-    logging.info("creating monthly backup from origin " + str(kwvars.backups.monthly.origin))
-
+    logger.info("creating monthly backup from origin " + str(kwvars.backups.monthly.origin))
+    cmd = "sudo rsync -aAXHSv " + str(kwvars.backups.monthly.origin) + " " + str(kwvars.backups.monthly.path)
+    ran_ok = util.run_cmd(cmd)
+    if not ran_ok:
+        logging.error("the script encoutnered an error creating the monthly backup")
+        return False
+    return True
 
 def make_weekly_backup(kwvars):
     '''
     copies a daily backup to weekly
     '''
-    logging.info("creating weekly backup from origin " + str(kwvars.backups.weekly.origin))
-    cmd = "sudo rsync -aAXHSv " + str(kwvars.backups.weekly.origin) + str(kwvars.backups.weekly.path)
+    logger.info("creating weekly backup from origin " + str(kwvars.backups.weekly.origin))
+    cmd = "sudo rsync -aAXHSv " + str(kwvars.backups.weekly.origin) + " " + str(kwvars.backups.weekly.path)
     ran_ok = util.run_cmd(cmd)
     if not ran_ok:
         logger.error("there was an error copying the daily backup to weekly")
@@ -157,13 +176,13 @@ def make_current_backup():
     '''
     runs the most recent backup (every few hours)
     '''
-    logging.info("starting current backup...")
-    cmd = "rsync -aAXHSv /* /mnt/omphalos_bak/ " + \
+    logger.info("starting current backup...")
+    cmd = "sudo rsync -aAXHSv /* /mnt/omphalos_bak/ " + \
             "--exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,\
-            /lost+found,/home/*/.gvfs,/home/*/.cache/*,/etc/fstab,/etc/hosts,/etc/hostname}"
+            /lost+found,/home/*/.gvfs,/home/*/.cache/*,/home/*/.mozilla/*,/etc/fstab,/etc/hosts,/etc/hostname}"
     ran_ok = util.run_cmd(cmd)
     if not ran_ok:
-        logging.error("the script encountered an error creating the current backup")
+        logger.error("the script encountered an error creating the current backup")
         return False
     return True
 
@@ -171,6 +190,7 @@ def make_todays_backup(kwvars):
     '''
     moves current backup to daily backups subfolder with today's date
     '''
+    logger.info("creating today's backup...")
     today = datetime.strftime(datetime.now(),'%Y-%m-%d')
     logging.info('copying current backup to todays backup ' + today)
     cmd = "sudo rsync -aAXHSv /mnt/omphalos_bak/ " + str(kwvars.backups.daily.path / today)
@@ -179,7 +199,7 @@ def make_todays_backup(kwvars):
         logger.error("the script encountered an error creating today's backup")
         return False
     kwvars.backups.daily.scrub = False
-    if len(list(kwvars.config.backup_daily.glob('*')))) > 7:
+    if len(list(kwvars.config.backup_daily.glob('*'))) > 7:
         kwvars.backups.daily.scrub = True
     return True
 
@@ -187,6 +207,7 @@ def make_backup(kwvars):
     '''
     manages the backups process
     '''
+    logger.info("starting backup process...")
     '''
     start with daily backup
     '''
@@ -199,14 +220,14 @@ def make_backup(kwvars):
         '''
         if we copy current to daily, make a new current
         '''
-        backup_worked = make_current_backup(kwvars)
+        backup_worked = make_current_backup()
         if not backup_worked:
             logger.error("there was a problem creating the current backup, quitting...")
             exit()
     '''
     make curent backup if requested
     '''
-    if kwvars.backup_now == True && kwvars.backups.daily.needs_new_backup == False:
+    if kwvars.backup_now == True and kwvars.backups.daily.needs_new_backup == False:
         backup_worked = make_current_backup(kwvars)
         if not backup_worked:
             logger.error("there was a problem writing a new current backup, quitting...")
@@ -238,7 +259,7 @@ def scrub_backup_dirs(kwvars):
     '''
     manages the process of removing overflow dirs from daily, weekly, monthly folder
     '''
-    logging.info("deleting old folders in daily, weekly, monthly dirs")
+    logger.info("deleting old folders in daily, weekly, monthly dirs")
     if kwvars.backups.daily.scrub:
         kwvars.backups.daily.remove_dirs = parse_backup_dates_for_removal(\
                 kwvars.backups.daily.path,7)
@@ -248,11 +269,15 @@ def scrub_backup_dirs(kwvars):
     if kwvars.backups.monthly.scrub:
         kwvars.backups.monthly.remove_dirs = parse_backup_dates_for_removal(\
                 kwvars.backups.monthly.path,365)
-    remove_dirs = [].append(\
-            kwvars.backups.daily.remove_dirs,\
-            kwvars.backups.weekly.remove_dirs,\
-            kwvars.backups.monthly.remove_dirs)
+    remove_dirs = []
+    if kwvars.backups.daily.remove_dirs:
+        remove_dirs += kwvars.backups.daily.remove_dirs
+    if kwvars.backups.weekly.remove_dirs:
+        remove_dirs += kwvars.backups.weekly.remove_dirs
+    if kwvars.backups.monthly.remove_dirs:
+        remove_dirs += kwvars.backups.monthly.remove_dirs
     for d in remove_dirs:
+        logger.info("removing overflow dir: " + str(d))
         shutil.rmtree(d)
 
 def init_log(kwvars):
@@ -331,13 +356,6 @@ def main():
     kwvars = init_args()
     kwvars.config = init_config()
     init_log(kwvars)
-    #daily_backup = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d_%H-%M-%S')
-    #weekly_backup = (datetime.now() - timedelta(7)).strftime('%Y-%m-%d_%H-%M-%S')
-    #monthly_backup = (datetime.now() - timedelta(30)).strftime('%Y-%m-%d_%H-%M-%S')
-    #logger.info("daily backup is " + daily_backup)
-    #logger.info("weekly backup is " + weekly_backup)
-    #logger.info("monthly backup is " + monthly_backup)
-    #kwvars.backups = get_backup_dates(kwvars.config.backup_logs)
     kwvars = make_backup(kwvars)
 
 if __name__ == "__main__":
