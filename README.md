@@ -18,9 +18,29 @@ integrate Gruvbox
 
 ### DWM
 
+#### current patches
+
+attachbelow
+
+barpadding
+
+dmenu match top
+
+fibonacci
+
+uselessgap
+
 #### add patches
 
+##### stack mgmt/ hard
+
 attachbottom
+
+leftstack
+
+rotatestack
+
+#### other
 
 barheight
 
@@ -30,13 +50,13 @@ centretitle
 
 colorbar
 
-cursorwarp
+**hide vacant tags**
 
-leftstack
+**pertag**
 
-rotatestack
+**4swapfocus**
 
-swapfocus
+**warp**
 
 winicon
 
