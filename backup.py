@@ -178,8 +178,8 @@ def make_current_backup():
     '''
     logger.info("starting current backup...")
     cmd = "sudo rsync -aAXHSv /* /mnt/omphalos_bak/ " + \
-            "--exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,\
-            /lost+found,/home/*/.gvfs,/home/*/.cache/*,/home/*/.mozilla/*,/etc/fstab,/etc/hosts,/etc/hostname}"
+            "--exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found" + \
+            "/home/*/.gvfs,/home/*/.cache/*,/home/*/.mozilla/*," + "/etc/fstab,/etc/hosts,/etc/hostname}"
     ran_ok = util.run_cmd(cmd)
     if not ran_ok:
         logger.error("the script encountered an error creating the current backup")
