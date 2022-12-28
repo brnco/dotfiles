@@ -5,9 +5,7 @@ neofetch
 # . /usr/share/powerline/bindings/bash/powerline.sh
 alias sudo='sudo '
 alias ope='sudo $(history -p !!)'
-export $TERM=xterm-256color
-export PATH=/home/bcoates/.local/bin:$PATH
-
+export PATH=/home/bec/.local/:$PATH
 function clear() {
     command clear && neofetch
 }
