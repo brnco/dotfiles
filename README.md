@@ -330,7 +330,6 @@ then, configure the driver for Xorg
     git clone git@github.com:brnco/dotfiles.git
     cd ~/code/dotfiles
     git branch kneme-3083_material-ocean
-    ./deploy -a
     
 ## ZFS
 
@@ -349,6 +348,14 @@ get your [aur helper](https://aur.archlinux.org/packages/yay)
 ### nerd-fonts-complete
 
 get [them fonts](https://aur.archlinux.org/packages/nerd-fonts-complete)
+
+### your neofetch build
+
+clone [this](https://github.com/brnco/neofetch) then make install it
+
+### your tmux config
+
+clone [this](https://github.com/thewtex/tmux-mem-cpu-load) then cmake make install it
 
 ## sound
 
