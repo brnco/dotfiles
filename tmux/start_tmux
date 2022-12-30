@@ -1,0 +1,19 @@
+#!/bin/bash
+
+session=$1
+
+if [ $session == "thm" ]
+then
+    tmux new-session -d -s $session
+    # window 0 is git
+    tmux rename-window -t 0 "git"
+    tmux send-keys -t "git" "cd ~/code/thm" C-m "git status" C-m
+    # window 1 is ingest.py
+    tmux new-window -t $session:1 -n "ingest"
+    tmux send-keys -t "ingest" "cd ~/code/thm" C-m "nvim ingest.py" C-m
+    # window 2 is files
+    tmux new-window -t $session:2 -n "files"
+    tmux send-keys -t "files" "cd /tub/brendan-project-archive/TheHistoryMakers/samples" C-m
+fi
+
+tmux attach-session -t $session:0
