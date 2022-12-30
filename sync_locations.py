@@ -32,6 +32,15 @@ def neofetch(dotfiles):
     dotfile = dotfiles / "neofetch"
     return [(dotfile / config_file, dispersed / config_file),(dotfile / special_file1, dispersed)]
 
+def tmux(dotfiles):
+    '''
+    for terminal multiplexing
+    '''
+    config_file = ".tmux.conf"
+    dispersed = "/home/bec"
+    dotfile = dotfiles / "tmux"
+    return [(dotfile / config_file, dispersed / config_file)]
+
 def vifm(dotfiles):
     '''
     for vifm for pretty file mgmt
