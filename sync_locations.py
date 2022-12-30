@@ -32,3 +32,17 @@ def neofetch(dotfiles):
     dotfile = dotfiles / "neofetch"
     return [(dotfile / config_file, dispersed / config_file),(dotfile / special_file1, dispersed)]
 
+def vifm(dotfiles):
+    '''
+    for vifm for pretty file mgmt
+    '''
+    config_file = "vifmrc"
+    dispersed = Path("/home/bec/.vifm")
+    colors = dispersed / "colors/"
+    dotfile = dotfiles / "vifm"
+    dots = [(dotfile / config_file, dispersed / config_file)]
+    for color_file in colors.iterdir():
+        dots.append((dotfile / color_file.relative_to(dispersed), dispersed / colors))
+    return dots
+
+
