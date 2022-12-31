@@ -48,7 +48,7 @@ static const int attachbelow = 1;    /* 1 means attach after the currently activ
 #include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[@]",      fibonacci },    /* first entry is default */
+	{ "[@]",      spiral },    /* first entry is default */
  	{ "[]=",      tile },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
