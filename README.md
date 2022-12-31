@@ -28,15 +28,19 @@ dmenu match top
 
 fibonacci
 
+hide vacant tags
+
+leftstack
+
 uselessgap
+
+warp (doesn't work tho)
 
 #### add patches
 
 ##### stack mgmt/ hard
 
 attachbottom
-
-leftstack
 
 rotatestack
 
@@ -49,14 +53,6 @@ barpadding
 centretitle
 
 colorbar
-
-**hide vacant tags**
-
-**pertag**
-
-**4swapfocus**
-
-**warp**
 
 winicon
 
