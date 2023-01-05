@@ -30,7 +30,26 @@ def neofetch(dotfiles):
     special_file1 = "smpte.ascii"
     dispersed = Path("/home/bec/.config/neofetch")
     dotfile = dotfiles / "neofetch"
-    return [(dotfile / config_file, dispersed / config_file),(dotfile / special_file1, dispersed)]
+    return [(dotfile / config_file, dispersed / config_file),(dotfile / special_file1, dispersed / special_file1)]
+
+def nvim(dotfiles):
+    '''
+    for neovim config prettyness
+    '''
+    config_file = "init.vim"
+    plugins = "plugged"
+    dispersed = Path("/home/bec/.config/nvim")
+    dotfile = dotfiles / "nvim"
+    return [(dotfile / config_file, dispersed / config_file), (dotfile / plugins, dispersed)]
+
+def starship(dotfiles):
+    '''
+    for starship for making terminal status line pretty
+    '''
+    config_file = "starship.toml"
+    dispersed = Path("/home/bec/.config/")
+    dotfile = dotfiles / "starship"
+    return [(dotfile / config_file, dispersed / config_file)]
 
 def tmux(dotfiles):
     '''

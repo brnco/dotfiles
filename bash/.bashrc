@@ -1,15 +1,18 @@
 neofetch
-# powerline-daemon -q
-# POWERLINE_BASH_CONTINUATION=1
-# POWERLINE_BASH_SELECT=1
-# . /usr/share/powerline/bindings/bash/powerline.sh
+
 alias sudo='sudo '
 alias ope='sudo $(history -p !!)'
 export PATH=/home/bec/.local/:$PATH
+
 function clear() {
     command clear && neofetch
 }
 export -f clear
+
+function ls() {
+    command ls -1 "$@"
+}
+export -f ls
 
 function git() {
     if [[ $@ == "ass" ]]; then
