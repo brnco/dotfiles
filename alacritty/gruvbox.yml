@@ -1,0 +1,24 @@
+# material ocean color scheme
+colors:
+  primary:
+    background: '0x282828'
+    foreground: '0xEBDBB2'
+  cursor:
+    cursor: '0x928374'
+  normal:
+    black:      '0x1D2021'
+    red:        '0xCC241D'
+    green:      '0x98971A'
+    yellow:     '0xD79921'
+    blue:       '0x458588'
+    magenta:    '0xB16286'
+    cyan:       '0x689D6A'
+    white:      '0xA89984'
+
+font:
+  size: 8.5
+  # fixes tmux bottom navbar being cut-off
+  offset:
+    y: 1
+  normal:
+    family: "BlexMono Nerd Font"

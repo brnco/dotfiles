@@ -8,18 +8,18 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int vertpad            = 8;       /* vertical padding of bar */
 static const int sidepad            = 8;       /* horizontal padding of bar */
-static const char *fonts[]          = { "MesloLGM Nerd Font:size=12:antialias=true" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "BlexMono Nerd Font Mono:size=12:antialias=true" };
+static const char dmenufont[]       = "BlexMono Nerd Font Mono,monospace:size=10";
 //background color
-static const char col_gray1[]      = "#0F111A";
+static const char col_gray1[]      = "#1D2021";
 //inactive window border color
-static const char col_gray2[]       = "#3B4252";
+static const char col_gray2[]       = "#282828";
 //font color
-static const char col_gray3[]       = "#E5E9F0";
+static const char col_gray3[]       = "#EBDBB2";
 //current tag and current window font color
-static const char col_gray4[]       = "#00010A";
+static const char col_gray4[]       = "#1D2021";
 //top bar and second color and active window border color
-static const char col_cyan[]        = "#A3BE8C";
+static const char col_cyan[]        = "#689D6A";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },

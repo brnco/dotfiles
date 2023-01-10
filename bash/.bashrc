@@ -8,6 +8,12 @@ alias ope='sudo $(history -p !!)'
 #export $TERM=xterm-256color
 export PATH=/home/bcoates/.local/bin:$PATH
 export HISTCONTROL=ignoreboth:erasedups
+
+function ls() {
+    command ls -1
+}
+export -f ls
+
 function clear() {
     command clear && neofetch
 }
