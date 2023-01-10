@@ -18,7 +18,7 @@ def palette():
                 "#81A1C1",
                 "#B48EAD",
                 "#88C0D0",
-                "#E5E9F0"]
+                "#E5E9F0"]}
     return palette
 
 def alacritty(dotfiles):
@@ -26,9 +26,10 @@ def alacritty(dotfiles):
     for alacritty terminal
     '''
     config_file = "alacritty.yml"
-    dispersed = Path("/home/bcoates/alacritty/")
+    dispersed = Path("/home/bcoates/.config/alacritty/")
+    colors = "gruvbox.yml"
     dotfile = dotfiles / "alacritty/"
-    return [(dotfile / config_file, dispersed / config_file)]
+    return [(dotfile / config_file, dispersed / config_file),(dotfile / colors, dispersed/ colors)]
 
 def bash(dotfiles):
     '''
