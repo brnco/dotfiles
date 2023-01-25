@@ -18,6 +18,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
+autocmd vimenter * ++nested colorscheme gruvbox
+
 let g:airline_theme='gruvbox'
 
 if (has("termguicolors"))
