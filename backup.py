@@ -180,14 +180,14 @@ def make_weekly_backup(kwvars):
             return False
     return True
 
-def make_current_backup():
+def make_current_backup(kwvars):
     '''
     runs the most recent backup (every few hours)
     '''
     logger.info("starting current backup...")
     cmd = "sudo rsync -aAXHSv /* /mnt/omphalos_bak/ " + \
-    "--exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found" + \
-            "/home/*/.gvfs,/home/*/.cache/*,/home/*/.mozilla/*," + "/etc/fstab,/etc/hosts,/etc/hostname}"
+    "--exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/user/share/fonts/nerd-fonts-complete/*" + \
+            "/tub/*,/home/*/.gvfs,/home/*/.cache/*,/home/*/.mozilla/*," + "/etc/fstab,/etc/hosts,/etc/hostname}"
     if not kwvars.test:
         ran_ok = util.run_cmd(cmd)
         if not ran_ok:
@@ -227,7 +227,7 @@ def make_backup(kwvars):
         '''
         if we copy current to daily, make a new current
         '''
-        backup_worked = make_current_backup()
+        backup_worked = make_current_backup(kwvars)
         if not backup_worked:
             logger.error("there was a problem creating the current backup, quitting...")
             exit()
