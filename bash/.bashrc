@@ -1,21 +1,17 @@
-neofetch
+# # # set environment variables
+export TERM="xterm-256color"			#get the nice colors you like
+export HISTCONTROL=ignoredups:erasedups		#no duplicate entries
+export EDITOR="vim"
 
+# # # aliases
 alias sudo='sudo '
 alias ope='sudo $(history -p !!)'
-export PATH=/home/bec/.local/:$PATH
 
-function clear() {
-    command clear && neofetch
-}
-export -f clear
-
-function ls() {
-    command ls -1 "$@"
-}
-export -f ls
+# # # functions
 
 function git() {
-    if [[ $@ == "ass" ]]; then
+if [[ $@ == "ass" ]]; then
+>>>>>>> bfccbe44d6e0c19f2f8bcbfdfb1e27aac7841515
         command git add .
     else
         command git "$@"
@@ -23,8 +19,6 @@ function git() {
 }
 export -f git
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    startx
-fi
-
+# # # launch
+neofetch
 eval "$(starship init bash)"
