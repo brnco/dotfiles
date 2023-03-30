@@ -266,15 +266,8 @@ this is the partition used by linux, not boot partition
     cd ~/code
     git clone git@github.com:brnco/dotfiles.git
     cd ~/code/dotfiles
-    git branch kneme-3083_material-ocean
-    
-## ZFS
-
-[this](https://wiki.archlinux.org/title/ZFS) is important
-
-    yay -S zfs-linux 
-
-
+    git branch pi-backyardwatcher
+    git branch --set-upstream-to=origin/pi-backyardwatcher pi-backyardwatcher
     
 ## beyond
 
@@ -284,7 +277,9 @@ get your [aur helper](https://aur.archlinux.org/packages/yay)
 
 ### nerd-fonts-complete
 
-get [them fonts](https://aur.archlinux.org/packages/nerd-fonts-complete)
+get [one single font](https://archlinux.org/packages/community/any/ttf-meslo-nerd/)
+
+TO DO - configure the fonts
 
 ### your neofetch build
 
