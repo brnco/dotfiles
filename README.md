@@ -25,14 +25,6 @@ used SanDisk MicroSD card in Vanja adapter for USB. drive
 1. plug in drive
 2. sudo cat ~/Downloads/archlinux-2023.03.01-x86_64.iso > /dev/sdf
 
-#### add new partition
-
-used MS Disk Management, formatted as FAT32
-
-#### prep media
-
-used Rufus
-
 ## Launch
 
 ### set keyboard layout
@@ -54,6 +46,8 @@ should be done automatically, but
     timedatctl status
 
 ## partition disk
+
+already contained EFI partiton but was MBR so we're re-doing everything
 
 ### set partition for boot
 
@@ -115,21 +109,23 @@ should be done automatically, but
 
 ## make file systems
 
-    mkfs.fat -F 32 /dev/sda1
+    mkfs.fat -F 32 /dev/sdf1
 
-    mkswap /dev/sda2
+    mkswap /dev/sdf2
 
-    swapon /dev/sda2
+    swapon /dev/sdf2
 
-    mkfs.ext4 /dev/sda3
+    mkfs.ext4 /dev/sdf3
 
 ## mount big partition
 
-    mount /dev/sda3 /mnt
+    mount /dev/sdf3 /mnt
     
 ## mount the EFI partition
 
-    mount /dev/sda1 /mnt/boot/
+    mkdir /mnt/boot
+
+    mount /dev/sdf1 /mnt/boot/
 
 ## run pacstrap
 
@@ -153,9 +149,11 @@ should be done automatically, but
 
     hwclock --systohc
 
-### set locale
+### install your favorite text editor
 
     pacman -S neovim
+    
+### set locale
 
     nvim /etc/locale.gen
 
@@ -167,7 +165,7 @@ should be done automatically, but
 
     nvim /etc/hostname
 
-    omphalos
+    pi-backyardwatcher
 
 ### create hostfile
 
@@ -177,7 +175,7 @@ should be done automatically, but
 
     ::1         localhost
 
-    127.0.1.1   omphalos.localdomain    omphalos
+    127.0.1.1   pi-backyardwatcher.localdomain    pi-backyardwatcher
 
 ### create users
 
@@ -207,7 +205,7 @@ from [here](https://github.com/systemd/systemd/issues/13603#issuecomment-8648605
 
 this is the partition used by linux, not boot partition
 
-    blkid -s PARTUUID -o value /dev/sda3 >> /boot/loader/entries/arch.conf
+    blkid -s PARTUUID -o value /dev/sdf3 >> /boot/loader/entries/arch.conf
 
 ### configure boot entry
 
@@ -251,64 +249,11 @@ this is the partition used by linux, not boot partition
     
 # Post Install
 
-## cleanup
-
-nouveau didn't like the startup without nvidia drivers but isntalling them removed the error
-
 ## other utils
 
 [Reference](https://wiki.archlinux.org/title/General_recommendations)
 
-`sudo pacman -S git firefox starship neofetch nitrogen picom apache alacritty dolphin vifm moc tmux obs-studio ffmpeg vlc mediainfo openssh base-devel unzip tree`
-
-## desktop environment
-
-### Xorg
-
-[guide](https://wiki.archlinux.org/title/Xorg)
-
-`sudo pacman -S xorg-server xorg-xinit xorg-apps`
-
-then we need to make your `~/.xinitrc`
-
-
-
-### nvidia
-
-[guide](https://wiki.archlinux.org/title/NVIDIA)
-
-your GTX 960 is too old for the open-sourced NVIDIA drivers so you're usign regular NVIDIA dirvers instead (per [this tool](https://www.nvidia.com/Download/index.aspx))
-
-`sudo pacman -S nvidia nvidia-utils`
-
-then, configure the driver for Xorg
-
-`sudo nvidia-xconfig`
-
-`reboot`
-
-### dwm
-
-[guide](https://wiki.archlinux.org/title/dwm)
-
-    mkdir code
-    cd code
-    git clone git://git.suckless.org/dwm
-    cd dwm
-    nvim config.h [change terminal cmd to alacritty]
-    sudo make clean install`
-
-### set startx
-
-    nvim ~/.xinitrc
-    exec dwm
-
-#### set startx -> run on login
-
-    nvim ~/.bashrc
-    if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec startx
-    fi
+`sudo pacman -S git starship neofetch apache alacritty tmux ffmpeg mediainfo openssh base-devel unzip tree`
 
 ## get your dang dotfiles
 
