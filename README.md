@@ -1,16 +1,12 @@
-# system files for Omphalos build
+# system files for pi-backyardwatcher build
 
-## material ocean
-
-[Material Ocean theme](https://github.com/material-ocean/Material-Ocean)
-
-# Install Guide for Omphalos
+# Install Guide for pi-backyardwatcher
 
 [Arch Wiki Install Guide](https://wiki.archlinux.org/title/installation_guide)
 
 ## initial setup
 
-Using CHM 3083 Windows Surface Pro 3 with VirtualBox running Arch guest kneme
+Using Omphalos
 
 ### Acquire iso
 
@@ -18,20 +14,16 @@ used MIT mirror
 
 ### check sig
 
-used Arch VM with pacman-key and shared folder C:\Users\user\Downloads -> /mnt/Downloads
+pacman-key -v ~/Downloads/archlinux-2023.03.01-x86_64.iso.sig
 
 ### prep install media
 
-used Patriot 15GB USB drive. Had previous Arch bootable on it but because I'm making some changes and that was over a year old, decided to redo entirely.
+used SanDisk MicroSD card in Vanja adapter for USB. drive
 
 #### delete previous data/ partitions
 
 1. plug in drive
-2. launch cmd.exe as admin
-3. `diskpart`
-4. `list disk`
-5. `select Disk 1`
-6. `clear`
+2. sudo cat ~/Downloads/archlinux-2023.03.01-x86_64.iso > /dev/sdf
 
 #### add new partition
 
