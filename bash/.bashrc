@@ -11,7 +11,6 @@ alias ope='sudo $(history -p !!)'
 
 function git() {
 if [[ $@ == "ass" ]]; then
->>>>>>> bfccbe44d6e0c19f2f8bcbfdfb1e27aac7841515
         command git add .
     else
         command git "$@"
