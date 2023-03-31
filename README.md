@@ -2,165 +2,32 @@
 
 # Install Guide for pi-backyardwatcher
 
-[Arch Wiki Install Guide](https://wiki.archlinux.org/title/installation_guide)
+[Arch ARM Install Guide](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3)
 
-## initial setup
+## step 9 above
 
-Using Omphalos
+use root login (so you can use pacman, sudo isn't installed)
 
-### Acquire iso
+## post-install
 
-used MIT mirror
+### update mirrors and stuff
 
-### check sig
+    pacman -Syu
 
-pacman-key -v ~/Downloads/archlinux-2023.03.01-x86_64.iso.sig
+### create users
 
-### prep install media
+    passwd - create new root password
 
-used SanDisk MicroSD card in Vanja adapter for USB. drive
+    useradd -m bec - create your user name
 
-#### delete previous data/ partitions
+    passwd bec
 
-1. plug in drive
-2. sudo cat ~/Downloads/archlinux-2023.03.01-x86_64.iso > /dev/sdf
-
-## Launch
-
-### set keyboard layout
-
-should be done automatically, but
-
-    ls /usr/share/kbd/keymaps/**/*.map.gz | less
-
-    loadkeys [keymap]
-
-## get working internet
-
-    ping google.com
-
-## set system clock
-
-    timedatectl set-ntp true
-
-    timedatctl status
-
-## partition disk
-
-already contained EFI partiton but was MBR so we're re-doing everything
-
-### set partition for boot
-
-    fdisk -l
-
-    fdisk /dev/sda
-
-    g - create gpt partition table
-
-    n - create new partition
-
-    1 - set partition number
-
-    enter - default start block
-
-    +550M - EFI partition, needs to be 550MB
-
-### set partition for swap
-
-    n - new partition
-
-    2 - partition number
-
-    enter - default start block
-
-    +2G - 2GB swap size
-
-### set partition for linux install
-
-    n - new partition
-
-    3 - 3rd partition
-
-    enter - default start block
-
-    enter - default size/ end block
-
-### set correct partition types for each of the above
-
-#### boot
-
-    t - change partition type
-
-    1 - partition type
-
-    1 - EFI system
-
-#### swap
-
-    t
-
-    2
-
-    19 - linmux swap
-
-### write table to disk
-
-    w
-
-## make file systems
-
-    mkfs.fat -F 32 /dev/sdf1
-
-    mkswap /dev/sdf2
-
-    swapon /dev/sdf2
-
-    mkfs.ext4 /dev/sdf3
-
-## mount big partition
-
-    mount /dev/sdf3 /mnt
-    
-## mount the EFI partition
-
-    mkdir /mnt/boot
-
-    mount /dev/sdf1 /mnt/boot/
-
-## run pacstrap
-
-    pacstrap /mnt base linux linux-firmware
-
-## generate fstab
-
-    genfstab -U /mnt >> /mnt/etc/fstab
-
-## setup in root dir of new install
-
-    arch-chroot /mnt
-
-### set timezone
-
-    ln -sf /usr/share/zoneinfo/America/LosAngeles /etc/localtime
-
-    ls /usr/share/zoneinfo/America - lists cities for zoneinfo
-
-### set hardware clock
-
-    hwclock --systohc
+    usermod -aG wheel,audio,video,optical,storage bec
 
 ### install your favorite text editor
 
     pacman -S neovim
     
-### set locale
-
-    nvim /etc/locale.gen
-
-    uncomment "en_US.UTF-8 UTF-8"
-
-    locale-gen
-
 ### set hostname
 
     nvim /etc/hostname
@@ -177,83 +44,33 @@ already contained EFI partiton but was MBR so we're re-doing everything
 
     127.0.1.1   pi-backyardwatcher.localdomain    pi-backyardwatcher
 
-### create users
-
-    passwd - create new root password
-
-    useradd -m bec - create your user name
-
-    passwd bec
-
-    usermod -aG wheel,audio,video,optical,storage bec
-
 ### add sudo
 
     pacman -S sudo
 
     EDITOR=nvim visudo
 
-    %wheel All=(ALL:ALL) ALL
-
-### install systemd-boot loader
-    
-from [here](https://github.com/systemd/systemd/issues/13603#issuecomment-864860578)
-    
-    bootctl install --graceful
-    
-### get root partition UUID
-
-this is the partition used by linux, not boot partition
-
-    blkid -s PARTUUID -o value /dev/sdf3 >> /boot/loader/entries/arch.conf
-
-### configure boot entry
-
-    *esp*/loader/entries/arch.conf
-    title   Arch Linux
-    linux   /vmlinuz-linux
-    initrd  /intel-ucode.img
-    initrd  /initramfs-linux.img
-    options root=PARTUUID=*UUID from previous step* rw
-    
-    cp arch.conf arch-fallback.conf
-    
-    *esp*/loader/entries/arch-fallback.conf
-    title   Arch Linux (fallback initramfs)
-    linux   /vmlinuz-linux
-    initrd  /intel-ucode.img
-    initrd  /initramfs-linux-fallback.img
-    options root=PARTUUID=*UUID from previous step* rw
-    
-### install microcode
-
-    sudo pacman -S intel-ucode
+    %wheel All=(ALL:ALL) ALL 
 
 ### install and enable Networkmanager
 
     pacman -S networkmanager
 
     systemctl enable NetworkManager
-
-### exit chroot
-
-    exit
-
-### unmount
-
-    umount -l /mnt
-
-## shutdown
-
-    shutdown now
     
-# Post Install
+    systemctl start NetworkManager.service
 
 ## other utils
 
 [Reference](https://wiki.archlinux.org/title/General_recommendations)
 
 `sudo pacman -S git starship neofetch apache alacritty tmux ffmpeg mediainfo openssh base-devel unzip tree`
+
+### get ssh going
+
+    systemctl enable sshd
+    
+    systemctl start sshd.service
 
 ## get your dang dotfiles
 
