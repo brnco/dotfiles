@@ -56,7 +56,7 @@ def tmux(dotfiles):
     for terminal multiplexing
     '''
     config_file = ".tmux.conf"
-    dispersed = "/home/bec"
+    dispersed = Path("/home/bec")
     dotfile = dotfiles / "tmux"
     return [(dotfile / config_file, dispersed / config_file)]
 
