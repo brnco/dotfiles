@@ -2,6 +2,6 @@
 
 systemctl enable zfs-mount
 systemctl enable zfs.target
-zpool import -d /dev/disk/by-uuid tub
+zpool import -d /dev/disk/by-partuuid tub
 zpool status -v tub
 systemctl start smb
