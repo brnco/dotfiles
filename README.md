@@ -335,12 +335,14 @@ then, configure the driver for Xorg
 
 [this](https://wiki.archlinux.org/title/ZFS) is important
 
-    yay -S zfs-dkms
+    yay -S zfs-dkms zfs-utils
 
 you'll find that after running pacman -Syu you won't be able to run ZFS, in spite of a DKMS build of some kind during the update
 
-to fix this, just runt he above to re-install ZFS-dkms
+to fix this, remove the zfs packages and reinstall
 
+    `yay -R zfs-dkms zfs-utils
+    yay -S zfs-dkma zfs-utils`
 
     
 ## beyond
