@@ -32,5 +32,6 @@ do
     sleep 1m
 done &
 
-xrandr --output VGA-1 --mode 1920x1440
-exec dbus-launch dwm
+xrandr --output VGA-1 --mode 2560x1440
+#exec dbus-launch dwm
+while type dwm>/dev/null ;do dwm && continue || break ;done
